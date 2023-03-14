@@ -23,16 +23,15 @@
 <body resume>
   <aside>
     {{#with basics}}
-    <div class="photo">
-      <div class="hex hex-border hex-absolute"></div>
-      <div class="hex hex-solid">
-        {{#if image}}
-          <img src="{{image}}" alt="photo">
-        {{else}}
-          <img src="https://picsum.photos/200" alt="photo">
-        {{/if}}
+    
+    {{#if image}}
+      <div class="photo">
+        <div class="hex hex-border hex-absolute"></div>
+        <div class="hex hex-solid">
+            <img src="{{image}}" alt="photo">    
+        </div>
       </div>
-    </div>
+    {{/if}}
 
     <div class="name">
       {{names name}}
@@ -43,16 +42,16 @@
     </div>
 
     <section class="contacts">
-      <div class="heading">
+      <div class="heading flex-row">
         <div class="hex-icon">
           <div class="hex hex-border"></div>
           <i class="fa-solid fa-id-badge"></i>
         </div>
-        <h3>CONTACT ME</h3>
-        <hr />
+        <h3>Contact Me</h3>
       </div>
 
       <ul>
+        {{#if phone}}
         <li>
           <div class="hex-icon">
             <div class="hex hex-solid"></div>
@@ -62,6 +61,9 @@
             {{phone}}
           </div>
         </li>
+        {{/if}}
+
+        {{#if email}}
         <li>
           <div class="hex-icon">
             <div class="hex hex-solid"></div>
@@ -71,6 +73,9 @@
             <a href="mailto:{{email}}">{{email}}</a>
           </div>
         </li>
+        {{/if}}
+
+        {{#if url}}
         <li>
           <div class="hex-icon">
             <div class="hex hex-solid"></div>
@@ -85,49 +90,117 @@
             </a>
           </div>
         </li>
+        {{/if}}
+
+        {{#if location}}
         <li>
           <div class="hex-icon">
             <div class="hex hex-solid"></div>
             <i class="fa-solid fa-location-dot"></i>
           </div>
           <div>
-            {{location.city}}, {{location.countryCode}}
+            {{#if location.city}}
+              {{location.city}}
+            {{/if}}
+            {{#if location.region}}
+              {{#if location.city}},{{/if}} 
+              {{location.region}}
+            {{/if}}
+            {{#if location.countryCode}}
+              {{#if location.region}},{{/if}} 
+              {{location.countryCode}}
+            {{/if}}
           </div>
         </li>
+        {{/if}}
       </ul>
     </section>
     {{/with}}
 
+  {{#if skills}}
     <section class="skills">
-      <div class="heading">
+      <div class="heading flex-row">
         <div class="hex-icon">
           <div class="hex hex-border"></div>
           <i class="fa-solid fa-code"></i>
         </div>
-        <h3>SKILLS</h3>
-        <hr />
+        <h3>Skills</h3>
       </div>
 
-      {{#skills skills as | sk |}}
+      {{#each skills as | sk |}}
         <div class="skill">
-          <h6>{{name}}</h6>
+          <span>{{name}}</span>
           <div>
-          {{#levels level as | lvl |}}
-            <span class="skill-level {{#if this}}skill-level-active{{/if}}"></span>
-          {{/levels}}
+          {{#if level}}
+            {{#if (or (eq level "1") (eq level "1/5"))}}
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level"></span>
+              <span class="skill-level"></span>
+              <span class="skill-level"></span>
+              <span class="skill-level"></span>
+            {{/if}}
+            {{#if (eq or (eq level "2") (eq level "2/5"))}}
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level"></span>
+              <span class="skill-level"></span>
+              <span class="skill-level"></span>
+            {{/if}}
+            {{#if (or (eq level "3") (eq level "3/5"))}}
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level"></span>
+              <span class="skill-level"></span>
+            {{/if}}
+            {{#if (or (eq level "4") (eq level "4/5"))}}
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level"></span>
+            {{/if}}
+            {{#if (or (eq level "5") (eq level "5/5"))}}
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level skill-level-active"></span>
+              <span class="skill-level skill-level-active"></span>
+            {{/if}}
+          {{/if}}
           </div>
         </div>
-      {{/skills}}
+      {{/each}}
+    </section>
+  {{/if}}
+
+    <section class="talks">
+      <div class="heading flex-row">
+        <div class="hex-icon">
+          <div class="hex hex-border"></div>
+          <i class="fa-solid fa-microphone"></i>
+        </div>
+        <h3>Talks and Presentations</h3>
+      </div>
+      <p>
+        Slides, audio, and video available from
+        numerous presentations:
+        <a href="https://allthingsauth.com/talks">
+          allthingsauth.com/talks
+        </a>
+        <sup>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </sup>.
+      </p>
     </section>
 
     <section class="social">
-      <div class="heading">
+      <div class="heading flex-row">
         <div class="hex-icon">
           <div class="hex hex-border"></div>
           <i class="fa-solid fa-share-nodes"></i>
         </div>
-        <h3>CONNECT</h3>
-        <hr />
+        <h3>Profiles</h3>
       </div>
 
       <ul>
@@ -151,48 +224,29 @@
   </aside>
 
   <main>
-    <section class="profile">
-      <div class="heading">
-        <div class="hex-icon">
-          <div class="hex hex-border"></div>
-          <i class="fa-solid fa-id-badge"></i>
-        </div>
-        <h3>PROFILE</h3>
-        <hr />
-      </div>
-
-      {{#with basics}}
-      <summary>{{{summary}}}</summary>
-      {{/with}}
-    </section>
-
     <section class="work">
-      <div class="heading">
+      <div class="heading flex-row">
         <div class="hex-icon">
           <div class="hex hex-border"></div>
           <i class="fa-solid fa-briefcase"></i>
         </div>
-        <h3>WORK EXPERIENCE</h3>
-        <hr />
+        <h3>Notable Work Experience</h3>
       </div>
 
       {{#each work}}
       <div class="company">
-
-        <div class="heading">
+        <div class="heading flex-row">
           <h4>
             {{name}}
-            <a href="{{url}}" target="_blank">{{tiny url}}</a>
+            {{#if url}}
+              <a href="{{url}}" target="_blank">{{tiny url}}</a>
+            {{/if}}
           </h4>
-
-          <div class="dates">
-            <i class="fa-solid fa-calendar-days"></i>
-            {{date startDate}} - {{#if endDate}}{{date endDate}}{{else}}{{date }}{{/if}}
-          </div>
+          <span class="position">{{position}}</span>
+          {{> dates startDate=startDate endDate=endDate}}
         </div>
 
-        <div class="position">{{position}}</div>
-        <div class="summary">{{md summary}}</div>
+        <div class="summary">{{summary}}</div>
 
         <div class="highlights">
           {{#each highlights as | stack |}}
@@ -203,31 +257,59 @@
       {{/each}}
     </section>
 
+    <section class="publications">
+      <div class="heading flex-row">
+        <div class="hex-icon">
+          <div class="hex hex-border"></div>
+          <i class="fa-solid fa-scroll"></i>
+        </div>
+        <h3>Refereed Publications</h3>
+      </div>
+
+      {{#each publications}}
+      <div class="publication">
+        <div>
+          <b>
+            {{name}}.
+          </b>
+          {{summary}}
+          {{#if award}}
+            <i class="fa-solid fa-trophy"></i>
+            {{award}}.
+          {{/if}}
+          {{#if url}}
+            [<a href="{{url}}" target="_blank">{{publisher}}
+              <sup>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </sup>
+            </a>]
+          {{/if}}
+        </div>
+      </div>
+      {{/each}}
+    </section>
+
     <section class="education">
-      <div class="heading">
+      <div class="heading flex-row">
         <div class="hex-icon">
           <div class="hex hex-border"></div>
           <i class="fa-solid fa-graduation-cap"></i>
         </div>
-        <h3>EDUCATION</h3>
-        <hr />
+        <h3>Education</h3>
       </div>
 
       {{#each education as | e |}}
       <div class="institution">
-        <div class="heading">
+        <div class="heading flex-row">
           <h4>
             {{institution}}
-            <a href="{{url}}" target="_blank">{{tiny url}}</a>
+            {{#if url}}
+              <a href="{{url}}" target="_blank">{{tiny url}}</a>
+            {{/if}}
           </h4>
-
-          <div class="dates">
-            <i class="fa-solid fa-calendar-days"></i>
-            {{date startDate}}{{#if endDate}} - {{date endDate}}{{/if}}
-          </div>
+          <span class="studyType">{{studyType}}</span>
+          {{> dates startDate=startDate endDate=endDate}}
         </div>
-        {{!-- <div class="studyType">{{studyType}}</div> --}}
-        <div class="area">{{area}}</div>
       </div>
       {{/each}}
     </section>

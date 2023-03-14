@@ -1,0 +1,9 @@
+<div class="dates flex-end">
+  <i class="fa-solid fa-calendar-days"></i>
+  {{date startDate}}
+  {{#if (eq endDate "present")}}
+    - Present
+  {{else}}
+    - {{date endDate}}
+  {{/if}}
+</div>
