@@ -91,7 +91,7 @@ select {
 
 @media print {
 	a {
-		color: var(--color-secondary);
+		color: 'black';
 		display: initial;
 	}
 
@@ -101,6 +101,10 @@ select {
 
 	.company {
 		break-inside: avoid;
+	}
+
+	*, .title, .name {
+		color: black;
 	}
 }
 
@@ -136,6 +140,7 @@ aside {
 	background-color: var(--color-secondary);
 	--color-hexagon: var(--color-primary);
 	--color-icon: var(--color-secondary);
+	padding-top: 2rem;
 }
 
 aside a {
@@ -264,26 +269,25 @@ sup {
 	text-align: center;
 }
 
+section > .heading {
+	border-bottom: solid 1px;
+	margin-bottom: 15px;
+}
+
 .heading {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 2rem 0 1rem;
+	padding-top: 2rem;
+	padding-bottom: 2px;
+}
+
+.heading > * {
+	margin-right: 20px;
 }
 
 .heading>h3 {
 	padding: 0 1rem 0 0.5rem;
 }
 
-.heading>hr {
-	flex: 1;
-	border: none;
-	border-bottom: 2px solid var(--color-icon);
-}
-
 .heading>h4 {
-	display: flex;
-	flex-direction: column;
 	font-size: 1.25rem;
 }
 
@@ -302,9 +306,21 @@ sup {
 	padding-right: 1rem;
 }
 
-.work .company .heading,
-.education .institution .heading {
-	align-items: unset;
+.publications .publication {
+	padding-right: 1rem;
+}
+
+.flex-start {
+	margin-right: auto;
+}
+
+.flex-end {
+	margin-left: auto;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
 }
 
 .work>div:nth-child(2) .heading,
@@ -312,20 +328,15 @@ sup {
 	padding-top: 0;
 }
 
-.work .position {
-	font-size: 0.9rem;
-	opacity: 0.6;
-}
-
 .work .summary {
-	margin: 8px 0 16px 0;
+	margin-bottom: 8px;
 }
 
 .work .highlights {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 2px;
-	font-size: .5rem;
+	font-size: 1rem;
 }
 
 .work .highlights>.stack {
@@ -355,10 +366,11 @@ sup {
 	align-items: center;
 	justify-content: space-between;
 	padding: 0px 1rem 0 0.5rem;
+	margin-bottom: 5px;
 }
 
 .skill>h3 {
-	display: inline-block;
+	/* display: inline-block; */
 	margin: 1rem 0;
 }
 
